@@ -1,7 +1,11 @@
 package vn.edu.usth.weather;
 
+import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.AttributeSet;
 import android.util.Log;
+import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,6 +30,16 @@ public class WeatherActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+    }
+    @Override
+    public View onCreateView(String name, Context context, AttributeSet attrs) {
+        View view = super.onCreateView(name, context, attrs);
+        if (view != null) {
+            // Set the background color to one of the specified colors
+            // For example: #20FF0000 (semi-transparent red)
+            view.setBackgroundColor(Color.parseColor("#20FF0000"));
+        }
+        return view;
     }
     @Override
     protected void onStart() {
