@@ -1,8 +1,9 @@
-package com.example.myapplication;
+package vn.edu.usth.weather;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
-import android.app.Fragment;
+import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +14,7 @@ import android.view.ViewGroup;
  * Use the {@link ForecastFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ForecastFragment extends Fragment {
+public class recFoastFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -58,14 +59,18 @@ public class ForecastFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_forecast, container, false);
-        v.setBackgroundColor(0x2000FFFF);
-        return v;
+        View view = super.onCreateView(inflater, container, savedInstanceState);
+        if (view != null) {
+            // Set the background color to one of the specified colors
+            // For example: #20FF0000 (semi-transparent red)
+            view.setBackgroundColor(Color.parseColor("#20FF0000"));
+        }// Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_forecast, container, false);
     }
 }
 
-////        //Labwork 4
+
+////        Labwork 4
 ////        LinearLayout linearLayout = new LinearLayout(getContext());
 ////        linearLayout.setOrientation(LinearLayout.VERTICAL);
 ////
