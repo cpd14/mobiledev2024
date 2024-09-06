@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.FragmentTransaction;
 
 public class WeatherActivity extends AppCompatActivity {
     private static final String TAG = "WeatherActivities";
@@ -30,6 +31,13 @@ public class WeatherActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        setContentView(R.layout.activity_weather);
+        // Adding ForecastFragment to the container dynamically
+        ForecastFragment forecastFragment = new ForecastFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.add(R.id.container, forecastFragment).commit();
+
     }
     @Override
     public View onCreateView(String name, Context context, AttributeSet attrs) {
@@ -41,6 +49,8 @@ public class WeatherActivity extends AppCompatActivity {
         }
         return view;
     }
+
+
     @Override
     protected void onStart() {
         super.onStart();

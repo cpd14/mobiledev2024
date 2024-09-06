@@ -7,8 +7,10 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
-import com.example.myapplication.R;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -61,6 +63,24 @@ public class ForecastFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        // Create a new LinearLayout
+        LinearLayout layout = new LinearLayout(getContext());
+        layout.setOrientation(LinearLayout.VERTICAL); // Set orientation to vertical
+
+        // Create a TextView dynamically
+        TextView dayTextView = new TextView(getContext());
+        dayTextView.setText("Thursday"); // Set text to "Thursday"
+        dayTextView.setTextSize(20); // Set text size for better visibility
+
+        // Create an ImageView dynamically
+        ImageView weatherIconImageView = new ImageView(getContext());
+        weatherIconImageView.setImageResource(R.drawable.pic5);
+        // Replace with your actual drawable name
+
+        // Add the TextView and ImageView to the LinearLayout
+        layout.addView(dayTextView);
+        layout.addView(weatherIconImageView);
+
         return inflater.inflate(R.layout.fragment_forecast2, container, false);
     }
 }
