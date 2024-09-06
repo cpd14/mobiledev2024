@@ -64,3 +64,18 @@ public class ForecastFragment extends Fragment {
         return v;
     }
 }
+
+////        //Labwork 4
+////        LinearLayout linearLayout = new LinearLayout(getContext());
+////        linearLayout.setOrientation(LinearLayout.VERTICAL);
+////
+////        TextView textView = new TextView(getContext());
+////        textView.setText("Thursday");
+////
+////        ImageView imageView = new ImageView(getContext());
+////        imageView.setImageResource(R.drawable.cloudy);
+////
+////        linearLayout.addView(textView);
+////        linearLayout.addView(imageView);
+//
+//        return linearLayout;
