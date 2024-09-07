@@ -81,6 +81,9 @@ public class ForecastFragment extends Fragment {
         layout.addView(dayTextView);
         layout.addView(weatherIconImageView);
 
-        return inflater.inflate(R.layout.fragment_forecast2, container, false);
+        return inflater.inflate(R.layout.fragment_forecast, container, false);
+    }
+
+    public void onSettingsClick(View view) {
     }
 }
