@@ -22,32 +22,20 @@ public class WeatherActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_weather);
-        Log.i(TAG, "onCreate called");
-        ForecastFragment firstFragment = new ForecastFragment();
-        getSupportFragmentManager().beginTransaction().add(R.id.main, firstFragment).commit();
-
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        Log.i(TAG, "onCreate: ");
 
-        setContentView(R.layout.activity_weather);
-        // Adding ForecastFragment to the container dynamically
-        ForecastFragment forecastFragment = new ForecastFragment();
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.add(R.id.container, forecastFragment).commit();
+        // ForecastFragment
+        ForecastFragment firstFragment = new ForecastFragment();
+        getSupportFragmentManager().beginTransaction().add(R.id.main, firstFragment).commit();
 
-    }
-    @Override
-    public View onCreateView(String name, Context context, AttributeSet attrs) {
-        View view = super.onCreateView(name, context, attrs);
-        if (view != null) {
-            // Set the background color to one of the specified colors
-            // For example: #20FF0000 (semi-transparent red)
-            view.setBackgroundColor(Color.parseColor("#20FF0000"));
-        }
-        return view;
+        // WeatherFragment
+        WeatherFragment secondFragment = new WeatherFragment();
+        getSupportFragmentManager().beginTransaction().add(R.id.main, secondFragment).commit();
     }
 
 
