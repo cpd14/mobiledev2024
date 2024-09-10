@@ -70,4 +70,6 @@
     <string name="snowing_5c_2c"><![CDATA[Snowing -5c->2c]]></string>
     <string name="foggy_24c_30c"><![CDATA[Foggy 24c->30c]]></string>
     <string name="hello_world">Hello World</string>
+    <string name="_12c_cloudy">12C Cloudy</string>
+    <string name="paris">Paris</string>
 </resources>
