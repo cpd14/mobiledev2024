@@ -53,7 +53,8 @@
             android:src="@drawable/settings_24px"
             android:gravity="center"
             android:background="#3944BC"
-            app:tint="@android:color/white"/>
+            app:tint="@android:color/white"
+            tools:ignore="HardcodedText" />
 
 
     </LinearLayout>

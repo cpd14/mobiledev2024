@@ -73,4 +73,5 @@
     <string name="_12c_cloudy">12C Cloudy</string>
     <string name="paris">Paris</string>
     <string name="type_of_weather">type of weather</string>
+    <string name="setting">Setting</string>
 </resources>
