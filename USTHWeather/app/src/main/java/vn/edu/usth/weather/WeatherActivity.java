@@ -13,6 +13,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.viewpager2.widget.ViewPager2;
 
 public class WeatherActivity extends AppCompatActivity {
     private static final String TAG = "WeatherActivities";
@@ -29,13 +30,14 @@ public class WeatherActivity extends AppCompatActivity {
         });
         Log.i(TAG, "onCreate: ");
 
-        // ForecastFragment
-        ForecastFragment firstFragment = new ForecastFragment();
-        getSupportFragmentManager().beginTransaction().add(R.id.main, firstFragment).commit();
+        // Find the ViewPager
+        ViewPager2 viewPager = findViewById(R.id.viewPager);
 
-        // WeatherFragment
-        WeatherFragment secondFragment = new WeatherFragment();
-        getSupportFragmentManager().beginTransaction().add(R.id.main, secondFragment).commit();
+        // Set up the ViewPager adapter
+        WeatherPagerAdapter adapter = new WeatherPagerAdapter(this);
+        viewPager.setAdapter(adapter);
+
+
     }
 
 

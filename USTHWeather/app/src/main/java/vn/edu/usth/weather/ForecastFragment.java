@@ -1,12 +1,15 @@
 package vn.edu.usth.weather;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -50,6 +53,10 @@ public class ForecastFragment extends Fragment {
         return fragment;
     }
 
+    private static final String TAG = "Weather";
+    ImageButton sb;
+    ImageButton rb;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,30 +67,40 @@ public class ForecastFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        // Create a new LinearLayout
-        LinearLayout layout = new LinearLayout(getContext());
-        layout.setOrientation(LinearLayout.VERTICAL); // Set orientation to vertical
+        //  LinearLayout view = new LinearLayout(getContext());
+        //        view.setBackgroundColor(Color.GREEN);
+        //        view.setOrientation(LinearLayout.VERTICAL);
+        //
+        //        TextView textView = new TextView(getContext());
+        //        textView.setText("Thursday");
+        //
+        //        ImageView imageView = new ImageView(getContext());
+        //        imageView.setImageResource(R.drawable.day_rain_thunder);
+        //
+        //        view.addView(imageView);
 
-        // Create a TextView dynamically
-        TextView dayTextView = new TextView(getContext());
-        dayTextView.setText("Thursday"); // Set text to "Thursday"
-        dayTextView.setTextSize(20); // Set text size for better visibility
+        View view = inflater.inflate(R.layout.fragment_forecast, container, false);
 
-        // Create an ImageView dynamically
-        ImageView weatherIconImageView = new ImageView(getContext());
-        weatherIconImageView.setImageResource(R.drawable.pic5);
-        // Replace with your actual drawable name
+        ImageButton sb = view.findViewById(R.id.Settingbutton1);
+        sb.setOnClickListener(new View.OnClickListener() {
+                                  @Override
+                                  public void onClick(View view) {
+                                      Log.i(TAG, "Setting!");
+                                  }
+                              }
+        );
 
-        // Add the TextView and ImageView to the LinearLayout
-        layout.addView(dayTextView);
-        layout.addView(weatherIconImageView);
+        ImageButton rb = view.findViewById(R.id.ReloadButton1);
+        rb.setOnClickListener(new View.OnClickListener() {
+                                  @Override
+                                  public void onClick(View view) {
+                                      Log.i(TAG, "Refresh!");
+                                  }
+                              }
+        );
 
-        return inflater.inflate(R.layout.fragment_forecast, container, false);
-    }
-
-    public void onSettingsClick(View view) {
+        return view;
     }
 }
