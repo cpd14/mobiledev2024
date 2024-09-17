@@ -1,45 +1,63 @@
 package vn.edu.usth.weather;
 
-import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.util.AttributeSet;
 import android.util.Log;
-import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager2.widget.ViewPager2;
+
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 
 public class WeatherActivity extends AppCompatActivity {
     private static final String TAG = "WeatherActivities";
+    ViewPager2 viewpager2;
+    TabLayout tabLayout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_weather);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.viewPager), (v, insets) -> {
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
         Log.i(TAG, "onCreate: ");
-
-        // Find the ViewPager
+        //Viewpager2
         ViewPager2 viewPager = findViewById(R.id.viewPager);
+        PagerAdapter adapter = new PagerAdapter(this);
+        viewpager2.setAdapter(adapter);
+        viewpager2.setOffscreenPageLimit(3);
 
-        // Set up the ViewPager adapter
-        WeatherPagerAdapter adapter = new WeatherPagerAdapter(this);
-        viewPager.setAdapter(adapter);
+        //Tab layout
+        tabLayout = findViewById(R.id.tabLayout);
+
+        // Link TabLayout and ViewPager2 with TabLayoutMediator
+        new TabLayoutMediator(tabLayout, viewpager2, (tab, position) -> {
+            switch (position) {
+                case 0:
+                    tab.setText("Ha Noi");
+                    break;
+                case 1:
+                    tab.setText("Paris");
+                    break;
+                case 2:
+                    tab.setText("Madrid");
+                    break;
+            }
+        }).attach();
+
+
 
 
     }
-
 
     @Override
     protected void onStart() {
@@ -70,6 +88,5 @@ public class WeatherActivity extends AppCompatActivity {
         super.onDestroy();
         Log.i(TAG, "onDestroy called");
     }
-
 
 }

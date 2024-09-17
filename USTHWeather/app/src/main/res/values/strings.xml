@@ -74,4 +74,5 @@
     <string name="paris">Paris</string>
     <string name="type_of_weather">type of weather</string>
     <string name="setting">Setting</string>
+    <string name="city_weather">City weather</string>
 </resources>
