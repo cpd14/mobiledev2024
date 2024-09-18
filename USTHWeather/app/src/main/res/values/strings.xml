@@ -38,4 +38,6 @@
     <string name="type_of_weather">type of weather</string>
     <string name="setting">Setting</string>
     <string name="city_weather">City weather</string>
+    <string name="transparentframe">transparentframe</string>
+    <string name="frame">frame</string>
 </resources>

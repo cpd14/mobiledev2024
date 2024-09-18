@@ -1,5 +1,6 @@
 package vn.edu.usth.weather;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -17,6 +18,7 @@ public class WeatherActivity extends AppCompatActivity {
     private static final String TAG = "WeatherActivities";
     ViewPager2 viewpager2;
     TabLayout tabLayout;
+    MediaPlayer mediaPlayer;
 
 
     @Override
@@ -54,10 +56,29 @@ public class WeatherActivity extends AppCompatActivity {
             }
         }).attach();
 
-
-
+        //media play
+        playAudio();
 
     }
+
+    private void playAudio() {
+        // Create a MediaPlayer instance with the MP3 file in res/raw
+        mediaPlayer = MediaPlayer.create(this, R.raw.music);
+
+        // Check if MediaPlayer was successfully created
+        if (mediaPlayer != null) {
+            /* Start playing the audio */
+            mediaPlayer.start();
+
+            // Optionally, set a listener to release resources when playback completes
+            mediaPlayer.setOnCompletionListener(mp -> {
+                mp.release(); // Release resources
+                mediaPlayer = null; // Set MediaPlayer to null
+            });
+        }
+    }
+
+
 
     @Override
     protected void onStart() {
@@ -86,6 +107,11 @@ public class WeatherActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        // Release MediaPlayer resources when the activity is destroyed
+        if (mediaPlayer != null) {
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
         Log.i(TAG, "onDestroy called");
     }
 

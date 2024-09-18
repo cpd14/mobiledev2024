@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -15,6 +16,7 @@
 
         <TextView
             android:id="@+id/item1"
+            android:contentDescription="@string/usth_weather"
             android:layout_width="240dp"
             android:layout_height="50dp"
             android:layout_marginStart="20dp"
@@ -50,62 +52,57 @@
     </LinearLayout>
 
     <!-- Container for WeatherFragment -->
-    <RelativeLayout
-        xmlns:tools="http://schemas.android.com/tools"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".WeatherFragment"
-        android:orientation="vertical"
-        android:layout_alignParentTop="true "
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="60dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="60dp"
         android:layout_marginRight="20dp"
-        android:layout_marginBottom="400dp"
-        android:background="#E6FDF5">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/transparentframe"
-            android:layout_marginStart=""/>
-
-
+        android:layout_marginBottom="470dp"
+        android:background="#E6FDF5"
+        android:orientation="vertical"
+        android:focusable="false"
+        tools:context=".WeatherFragment">
 
         <!-- TODO: Update blank fragment layout -->
 
         <TextView
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:text="@string/_12c_cloudy"
-            android:layout_marginTop="10dp"
             android:layout_marginStart="10dp"
-            android:textSize="20sp"
-            android:layout_alignParentStart="true" />
+            android:layout_marginTop="10dp"
+            android:text="@string/_12c_cloudy"
+            android:textSize="20sp" />
 
         <TextView
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:text="@string/paris"
-            android:gravity="end"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:textSize="20sp"
-            android:layout_alignParentEnd="true" />
+            android:layout_marginStart="300dp"
+            android:text="@string/paris"
+            android:textSize="20sp" />
 
         <ImageView
             android:layout_width="200dp"
             android:layout_height="200dp"
+            android:layout_gravity="center"
             android:contentDescription="@string/app_name"
             android:src="@drawable/filter_dramacloud_40px"
-            android:layout_centerHorizontal="true"
-            app:tint="#3944BC"/>
+            app:tint="#3944BC" />
 
-    </RelativeLayout>
+        <ImageView
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:contentDescription="@string/frame"
+            android:src="@drawable/transparentframe"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true" />
+
+    </FrameLayout>
 
     <!-- Container for ForecastFragment -->
     <LinearLayout
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
