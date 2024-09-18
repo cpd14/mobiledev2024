@@ -69,12 +69,7 @@ public class WeatherActivity extends AppCompatActivity {
         if (mediaPlayer != null) {
             /* Start playing the audio */
             mediaPlayer.start();
-
-            // Optionally, set a listener to release resources when playback completes
-            mediaPlayer.setOnCompletionListener(mp -> {
-                mp.release(); // Release resources
-                mediaPlayer = null; // Set MediaPlayer to null
-            });
+            
         }
     }
 
