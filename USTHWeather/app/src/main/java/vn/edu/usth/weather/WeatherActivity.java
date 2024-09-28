@@ -41,9 +41,10 @@ public class WeatherActivity extends AppCompatActivity {
             public void handleMessage(Message msg) {
 // This method is executed in main thread
                 String content = msg.getData().getString("server_response");
-                Toast.makeText(getApplicationContext(), content, Toast.LENGTH_SHORT).show();
+                Toast.makeText(WeatherActivity.this, content, Toast.LENGTH_SHORT).show();
             }
         };
+        
         Thread t = new Thread(() -> {
 // this method is run in a worker thread
             try {
@@ -62,6 +63,7 @@ public class WeatherActivity extends AppCompatActivity {
             handler.sendMessage(msg);
         });
         t.start();
+//
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
