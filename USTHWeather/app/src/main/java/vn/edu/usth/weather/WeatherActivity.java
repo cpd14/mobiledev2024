@@ -1,8 +1,12 @@
 package vn.edu.usth.weather;
 
+import android.annotation.SuppressLint;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toolbar;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,13 +23,18 @@ public class WeatherActivity extends AppCompatActivity {
     ViewPager2 viewpager2;
     TabLayout tabLayout;
     MediaPlayer mediaPlayer;
+    Toolbar toolBar;
 
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_weather);
+        // Toolbar
+        setSupportActionBar(findViewById(R.id.toolBar));
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -69,12 +78,30 @@ public class WeatherActivity extends AppCompatActivity {
         if (mediaPlayer != null) {
             /* Start playing the audio */
             mediaPlayer.start();
-            
+
         }
     }
 
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
 
 
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_search:
+// do something when search is pressed here
+                return true;
+            case R.id.action_settings:
+                return true;
+            case R.id.action_reload:
+                return true;
+            default:
+                super.onOptionsItemSelected(item);
+        }
+    }
+    
     @Override
     protected void onStart() {
         super.onStart();
