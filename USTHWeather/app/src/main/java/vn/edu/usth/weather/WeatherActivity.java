@@ -1,11 +1,14 @@
 package vn.edu.usth.weather;
 
-import android.annotation.SuppressLint;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 import androidx.activity.EdgeToEdge;
@@ -23,17 +26,42 @@ public class WeatherActivity extends AppCompatActivity {
     ViewPager2 viewpager2;
     TabLayout tabLayout;
     MediaPlayer mediaPlayer;
-    Toolbar toolBar;
 
-
-    @SuppressLint("MissingInflatedId")
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_weather);
         // Toolbar
-        setSupportActionBar(findViewById(R.id.toolBar));
+        Toolbar toolbar = findViewById(R.id.toolbar);
+
+        final Handler handler = new Handler(Looper.getMainLooper()) {
+            @Override
+            public void handleMessage(Message msg) {
+// This method is executed in main thread
+                String content = msg.getData().getString("server_response");
+                Toast.makeText(getApplicationContext(), content, Toast.LENGTH_SHORT).show();
+            }
+        };
+        Thread t = new Thread(() -> {
+// this method is run in a worker thread
+            try {
+// wait for 5 seconds to simulate a long network access
+                Thread.sleep(5000);
+            }
+            catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+// Assume that we got our data from server
+            Bundle bundle = new Bundle();
+            bundle.putString("server_response", "some sample json here");
+// notify main thread
+            Message msg = new Message();
+            msg.setData(bundle);
+            handler.sendMessage(msg);
+        });
+        t.start();
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -87,21 +115,26 @@ public class WeatherActivity extends AppCompatActivity {
         return true;
     }
 
-
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_search:
-// do something when search is pressed here
-                return true;
-            case R.id.action_settings:
-                return true;
-            case R.id.action_reload:
-                return true;
-            default:
-                super.onOptionsItemSelected(item);
+        int id = item.getItemId();
+        if (id == R.id.action_search) {
+            // do something when search is pressed
+            Toast.makeText(this, "Search clicked", Toast.LENGTH_SHORT).show();
+            return true;
+        } else if (id == R.id.action_settings) {
+            // do something when settings is pressed
+            Toast.makeText(this, "Settings clicked", Toast.LENGTH_SHORT).show();
+            return true;
+        } else if (id == R.id.action_reload) {
+            // do something when reload is pressed
+            Toast.makeText(this, "Reload clicked", Toast.LENGTH_SHORT).show();
+            return true;
         }
+        return super.onOptionsItemSelected(item);
     }
-    
+
+
     @Override
     protected void onStart() {
         super.onStart();
