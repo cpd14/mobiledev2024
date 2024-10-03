@@ -1,6 +1,7 @@
 package vn.edu.usth.weather;
 
 import android.media.MediaPlayer;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -21,11 +22,14 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
+import java.lang.ref.WeakReference;
+
 public class WeatherActivity extends AppCompatActivity {
     private static final String TAG = "WeatherActivities";
     ViewPager2 viewpager2;
     TabLayout tabLayout;
     MediaPlayer mediaPlayer;
+
 
     
     @Override
@@ -33,6 +37,10 @@ public class WeatherActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_weather);
+
+
+
+
         // Toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
 
@@ -63,7 +71,9 @@ public class WeatherActivity extends AppCompatActivity {
             handler.sendMessage(msg);
         });
         t.start();
-//
+
+
+
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -137,6 +147,43 @@ public class WeatherActivity extends AppCompatActivity {
     }
 
 
+    private static class FetchWeatherDataTask extends AsyncTask<String, Void, String> {
+        private WeakReference<WeatherActivity> activityReference;
+
+        // Constructor for the AsyncTask with a weak reference to the activity
+        FetchWeatherDataTask(WeatherActivity activity) {
+            activityReference = new WeakReference<>(activity);
+        }
+
+        @Override
+        protected void onPreExecute() {
+            // Optional preparation before the task runs
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            try {
+                // Simulate a network request by sleeping
+                Thread.sleep(3000);
+                // Replace this with actual network call logic
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return "Sample JSON response from server"; // Replace with actual result
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            // Get a valid reference to the activity
+            WeatherActivity activity = activityReference.get();
+            if (activity == null || activity.isFinishing()) {
+                return;
+            }
+
+            // Use the result (e.g., update the UI or display a toast)
+            Toast.makeText(activity, "Data received: " + result, Toast.LENGTH_SHORT).show();
+        }
+    }
     @Override
     protected void onStart() {
         super.onStart();
